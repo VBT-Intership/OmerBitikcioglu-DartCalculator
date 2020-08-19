@@ -1,17 +1,49 @@
+import 'dart:io';
+
 class Calculator {
-  static double add(double input1, double input2) {
-    return input1 + input2;
+  double _result;
+  double _operand1, _operand2;
+  var _op;
+
+  Calculator(this._result);
+
+  double get result {
+    return _result;
   }
 
-  static double sub(double input1, double input2) {
-    return input1 - input2;
+  void getInputs() {
+    print('Enter an operator(+, -, *, /):');
+    _op = stdin.readLineSync();
+
+    print('Enter first input: ');
+    _operand1 = double.parse(stdin.readLineSync());
+
+    print('Enter second input: ');
+    _operand2 = double.parse(stdin.readLineSync());
   }
 
-  static double mult(double input1, double input2) {
-    return input1 * input2;
+  double calculate() {
+    switch (_op) {
+      case '+':
+        _result = _operand1 + _operand2;
+        break;
+      case '-':
+        _result = _operand1 - _operand2;
+        break;
+      case '*':
+        _result = _operand1 * _operand2;
+        break;
+      case '/':
+        _result = _operand1 / _operand2;
+        break;
+      default:
+        throw ('Undefined operator!');
+    }
+    return _result;
   }
 
-  static double div(double input1, double input2) {
-    return input1 / input2;
+  @override
+  String toString() {
+    return "Result is ${_result}";
   }
 }
